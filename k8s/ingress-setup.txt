@@ -1,0 +1,10 @@
+# add kubectl namespace for nginx controller
+kubectl create namespace ingress-nginx
+# install nginx controller
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
+# verify deployment is up for ingress controller
+kubectl get pods -n ingress-nginx
+
+# when you're done, you can shutdown ingress by scaling down deployment
+kubectl scale deployment ingress-nginx-controller -n ingress-nginx --replicas=0
