@@ -6,9 +6,11 @@ plugins {
 
 group = 'com.restaurant'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
 description = 'Provides API gateway and cross-cutting concerns.'
+
+java {
+	sourceCompatibility = '17'
+}
 
 repositories {
 	mavenCentral()
@@ -39,9 +41,16 @@ dependencyManagement {
 	}
 }
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 bootBuildImage {
+	builder = "docker.io/paketobuildpacks/builder-jammy-base"
 	imageName = "${project.name}"
-	environment = ["BP_JVM_VERSION": "17.*"]
+	environment = ["BP_JVM_VERSION" : "17.*"]
 
 	docker {
 		publishRegistry {
