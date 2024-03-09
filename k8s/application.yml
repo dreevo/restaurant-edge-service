@@ -1,0 +1,9 @@
+spring:
+  redis:
+    host: restaurant-redis
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://restaurant-keycloak/realms/restaurant
